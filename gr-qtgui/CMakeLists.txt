@@ -14,11 +14,16 @@ include(GrPython)
 
 if (TRY_QT6_BUILD)
 gr_find_package(Qt6 QUIET
-    COMPONENTS Widgets
+    COMPONENTS Gui Widgets
     OPTIONAL_COMPONENTS OpenGL
     GLOBAL
 )
 set(QT_FOUND ${Qt6Widgets_FOUND})
+
+set(QT_LIBRARIES ${Qt6Gui_LIBRARIES} ${Qt6Widgets_LIBRARIES})
+set(QT_INCLUDE_DIRS ${Qt6Gui_INCLUDE_DIRS} ${Qt6Widgets_INCLUDE_DIRS})
+
+include_directories(SYSTEM ${Qt6Gui_INCLUDE_DIRS} ${Qt6Widgets_INCLUDE_DIRS})
 
 gr_python_check_module(
     DESC "PyQt6"
